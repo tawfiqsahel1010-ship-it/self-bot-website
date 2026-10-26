@@ -1,0 +1,9 @@
+.env
+*.session
+sessions/
+data/
+bot.py
+login_server.py
+login_bridge.py
+venv/
+__pycache__/
