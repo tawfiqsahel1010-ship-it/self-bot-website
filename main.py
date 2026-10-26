@@ -161,3 +161,57 @@ function toggleLang(){
 </body>
 </html>
 """)
+
+# Secure bot status heartbeat
+import os
+import time
+import secrets
+from pydantic import BaseModel
+from fastapi import Header, HTTPException
+
+BOT_STATUS_KEY = os.getenv("BOT_STATUS_KEY", "")
+BOT_STATUS = {
+    "online": False,
+    "last_seen": 0,
+    "message": "Waiting for bot heartbeat"
+}
+
+class HeartbeatPayload(BaseModel):
+    status: str = "online"
+
+@app.post("/api/bot-heartbeat")
+async def bot_heartbeat(
+    payload: HeartbeatPayload,
+    x_bot_key: str = Header(default="")
+):
+    if not BOT_STATUS_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="Bot status authentication is not configured"
+        )
+
+    if not secrets.compare_digest(x_bot_key, BOT_STATUS_KEY):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+
+    if payload.status != "online":
+        raise HTTPException(status_code=400, detail="Invalid status")
+
+    BOT_STATUS.update({
+        "online": True,
+        "last_seen": time.time(),
+        "message": "Heartbeat received"
+    })
+
+    return {"ok": True}
+
+@app.get("/api/bot-status")
+async def bot_status():
+    last_seen = BOT_STATUS["last_seen"]
+    age = time.time() - last_seen if last_seen else None
+
+    return {
+        "website": "online",
+        "bot": "online" if age is not None and age < 180 else "offline",
+        "last_seen_seconds_ago": int(age) if age is not None else None
+    }
+
