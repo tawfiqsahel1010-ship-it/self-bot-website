@@ -215,3 +215,12 @@ async def bot_status():
         "last_seen_seconds_ago": int(age) if age is not None else None
     }
 
+
+
+@app.get("/login", response_class=HTMLResponse)
+async def login_page():
+    from pathlib import Path
+    page = Path(__file__).with_name("login_page.html")
+    if not page.is_file():
+        return HTMLResponse("<h1>صفحه اتصال پیدا نشد</h1>", status_code=404)
+    return HTMLResponse(page.read_text(encoding="utf-8"))
