@@ -2,32 +2,45 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#168acd">
-<title>اتصال امن تلگرام</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<title>اتصال حساب | SELF BOT</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;
-justify-content:center;padding:20px;background:#eef5fb;
-font-family:Tahoma,Arial,sans-serif;color:#172b3a}
-.card{width:100%;max-width:420px;background:white;padding:30px 24px;
-border-radius:22px;box-shadow:0 12px 40px #173b5818;text-align:center}
-.logo{width:76px;height:76px;border-radius:50%;background:#168acd;
-color:white;font-size:38px;display:grid;place-items:center;margin:0 auto 18px}
-h1{font-size:23px;margin:0 0 12px}
-p{font-size:14px;line-height:2;color:#617385}
-.btn{display:block;text-decoration:none;background:#168acd;color:white;
-padding:15px;border-radius:12px;font-size:16px;margin-top:22px}
-.note{font-size:12px;background:#f2f7fb;padding:12px;border-radius:10px}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(ellipse at top,#173568,#080d1b 65%);font-family:Tahoma,Arial,sans-serif;color:#f5f8ff}
+.card{width:100%;max-width:460px;padding:30px 24px;background:#101a2b;border:1px solid #29456c;border-radius:24px;box-shadow:0 20px 70px #0005;text-align:center}
+.logo{width:76px;height:76px;margin:0 auto 18px;display:grid;place-items:center;border-radius:23px;background:linear-gradient(135deg,#218bff,#65e6ff);color:#071326;font-size:34px;font-weight:bold}
+h1{font-size:24px;margin:8px 0}
+.sub{color:#a9bbd7;font-size:14px;line-height:2}
+.status{margin:22px 0;padding:14px;border:1px solid #29456c;background:#0b1424;border-radius:13px;font-size:13px;line-height:2}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#f4bd50;margin-left:7px}
+.btn{display:block;margin-top:15px;padding:14px;border-radius:12px;background:linear-gradient(120deg,#218bff,#65dfff);color:#071326;font-weight:bold;text-decoration:none}
+.note{margin-top:20px;padding:14px;background:#2c2417;border:1px solid #66502a;border-radius:12px;color:#ffe8b0;font-size:12px;line-height:2}
+footer{margin-top:20px;color:#8095b7;font-size:11px}
+.lang{position:absolute;top:15px;left:15px;background:#152541;border:1px solid #31517e;color:white;padding:8px 11px;border-radius:9px}
 </style>
 </head>
 <body>
+<button class="lang" onclick="toggleLang()">EN / دری</button>
 <main class="card">
-<div class="logo">➤</div>
-<h1>اتصال حساب تلگرام</h1>
-<p>برای اتصال حساب خود به سرویس، از روش رسمی و امن تلگرام استفاده کنید.</p>
-<a class="btn" href="https://telegram.org/">رفتن به وب‌سایت رسمی تلگرام</a>
-<p class="note">کد ورود و رمز دومرحله‌ای خود را در اختیار هیچ شخص یا سایت ناشناسی قرار ندهید.</p>
+<div class="logo">S</div>
+<h1 data-fa="اتصال حساب تلگرام" data-en="Connect Telegram">اتصال حساب تلگرام</h1>
+<p class="sub" data-fa="به صفحهٔ اتصال SELF BOT خوش آمدید. پیش از اتصال حساب، معلومات امنیتی را با دقت بخوانید." data-en="Welcome to SELF BOT account connection. Read the security information before proceeding.">به صفحهٔ اتصال SELF BOT خوش آمدید. پیش از اتصال حساب، معلومات امنیتی را با دقت بخوانید.</p>
+<div class="status"><span class="dot"></span><span data-fa="این صفحه هنوز ورود مستقیم را فعال نکرده است." data-en="Direct sign-in is not enabled on this page yet.">این صفحه هنوز ورود مستقیم را فعال نکرده است.</span></div>
+<a class="btn" href="https://telegram.org/" target="_blank" rel="noopener noreferrer" data-fa="بازکردن وب‌سایت رسمی تلگرام ↗" data-en="Open official Telegram website ↗">بازکردن وب‌سایت رسمی تلگرام ↗</a>
+<div class="note" data-fa="هشدار امنیتی: کد ورود، رمز دومرحله‌ای یا فایل نشست تلگرام خود را در این صفحه یا برای افراد دیگر ارسال نکنید. این صفحه فعلاً حساب را وصل نمی‌کند." data-en="Security warning: Never enter or share your Telegram login code, two-step password, or session file here. This page does not connect an account yet.">هشدار امنیتی: کد ورود، رمز دومرحله‌ای یا فایل نشست تلگرام خود را در این صفحه یا برای افراد دیگر ارسال نکنید. این صفحه فعلاً حساب را وصل نمی‌کند.</div>
+<footer>SELF BOT • ANIL AND TAWFIQ</footer>
 </main>
+<script>
+let lang="fa";
+function toggleLang(){
+ lang=lang==="fa"?"en":"fa";
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="fa"?"rtl":"ltr";
+ document.querySelectorAll("[data-fa]").forEach(el=>{
+  el.textContent=el.getAttribute("data-"+lang);
+ });
+}
+</script>
 </body>
 </html>
